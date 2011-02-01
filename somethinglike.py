@@ -17,7 +17,7 @@ def movies_like(movie_title):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-n', '--number', help='number of recommendations to display (default: 3)', default=3)
+    parser.add_argument('-n', '--number', type=int, help='number of recommendations to display (default: 3)', default=3)
     parser.add_argument('-r', '--random', action='store_true', help='randomize the results')
     parser.add_argument('movie_title', help='the title of a movie you like', nargs='+')
     args = parser.parse_args()
