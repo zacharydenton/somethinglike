@@ -1,0 +1,10 @@
+usage: somethinglike.py [-h] [-n NUMBER] [-r] movie_title [movie_title ...]
+
+positional arguments:
+  movie_title           the title of a movie you like
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -n NUMBER, --number NUMBER
+                        number of recommendations to display (default: 3)
+  -r, --random          randomize the results
