@@ -1,19 +1,7 @@
 #!/usr/bin/env python
 # movie recommendations
-import urllib
-import random
 import argparse
-from lxml import etree
-
-class Movie(object):
-    def __init__(self, title):
-        self.title = title
-
-def movies_like(movie_title):
-    url = "http://www.tastekid.com/ask/ws?" + urllib.urlencode({'q' : movie_title})
-    doc = etree.parse(url)
-    for rec in doc.xpath('/similar/results/resource'):
-        yield Movie(rec.xpath('name')[0].text)
+import recommend
 
 def main():
     parser = argparse.ArgumentParser()
@@ -22,11 +10,10 @@ def main():
     parser.add_argument('movie_title', help='the title of a movie you like', nargs='+')
     args = parser.parse_args()
 
-    recommendations = list(movies_like(' '.join(args.movie_title)))
-    if args.random:
-        random.shuffle(recommendations)
-    for movie in recommendations[:args.number]:
-        print movie.title
+    recommender = recommend.TasteKidRecommender()
+    recommendations = recommender.recommend(' '.join(args.movie_title), args.random, args.number) 
+    for movie in recommendations:
+        print movie.name
 
 if __name__ == "__main__": 
     main()
